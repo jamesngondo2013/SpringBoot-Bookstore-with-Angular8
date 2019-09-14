@@ -1,0 +1,160 @@
+<div class="container">
+    <div [hidden]="bookAdded">
+        <mat-toolbar>
+            <div class="title-center">
+                <span style="font-weight: bold;">Add New Book</span>
+            </div>
+        </mat-toolbar>
+        <h4 style="margin-top: 2px; font-weight: lighter; color:blue">* is a required field</h4>
+
+        <mat-card>
+                <mat-card-content class="container">
+                  <form class="register-form" (ngSubmit)="onSubmit()">
+                    <!-- fxLayout="row" fxLayoutGap="20px" -->
+                    <div>
+                      <div fxLayout="column">
+                        <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                          <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center" class="mat-form-field--inline">
+                            <mat-form-field>
+                              <input matInput id="title" placeholder="Title" type="text" required [(ngModel)]="newBook.title" name="title">
+                            </mat-form-field>
+            
+                            <mat-form-field>
+                              <input matInput id="author" placeholder="Author" type="text" required [(ngModel)]="newBook.author" name="author">
+                             
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                          <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center" class="mat-form-field--inline">
+                            <mat-form-field>
+                              <input matInput id="publisher" placeholder="Publisher" type="text" required [(ngModel)]="newBook.publisher" name="publisher">
+                            </mat-form-field>
+
+                            <mat-form-field>
+                              <input matInput id="isbn" type="text" required [(ngModel)]="newBook.isbn" name="isbn" placeholder="ISBN">
+                             
+                            </mat-form-field>
+                          </div>
+                        </div>
+
+                        <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center" class="mat-form-field--inline">
+                                  <mat-form-field>
+                                    <input matInput id="shippingWeight" type="number" [(ngModel)]="newBook.shippingWeight" name="shippingWeight" step="0.01" placeholder="Shipping Weight">
+                                  </mat-form-field>
+
+                                  <mat-form-field>
+                                    <input matInput id="pageNumber" type="number" [(ngModel)]="newBook.numberOfPages" name="numberOfPages" step="1" placeholder="Number of Pages">
+                                  </mat-form-field>
+                                </div>
+                        </div>
+
+                        <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center" class="mat-form-field--inline">
+                                  <mat-form-field>
+                                    <input matInput id="listPrice" type="number" [(ngModel)]="newBook.listPrice" name="listPrice" step="0.01" placeholder="List Price">
+                                  </mat-form-field>
+
+                                  <mat-form-field>
+                                    <input matInput id="ourPrice" type="number" [(ngModel)]="newBook.ourPrice" name="ourPrice" step="0.01" placeholder="Our Price" required>
+                                  </mat-form-field>
+                                </div>
+                        </div>
+
+                        <div fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="center stretch" class="row">
+                          <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start" class="mat-form-field--inline">
+                            <mat-form-field>
+                                <textarea matInput id="description" [(ngModel)]="newBook.description" name="description" placeholder="Description" required></textarea>
+                            </mat-form-field>
+                            
+                            <mat-form-field>
+                              <input matInput placeholder="Numbers in Stock" id="inStockNumber" type="number" [(ngModel)]="newBook.inStockNumber" name="inStockNumber" step="0.01">
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      
+                        <div fxLayout="column" fxLayoutAlign="start" class="row">
+                            <div fxLayout="row" fxLayoutGap="50px">
+                            
+                                <div fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="start">
+                                    <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+                                        <h4>Select Category</h4>
+                                        <mat-form-field>
+                                            <mat-label>Category</mat-label>
+                                            <select matNativeControl id="category" name="category" [(ngModel)]="newBook.category">
+                                                <option value="management">Management</option>
+                                                <option value="fiction">Fiction</option>
+                                                <option value="engineering">Engineering</option>
+                                                <option value="programming">Programming</option>
+                                            </select>
+                                        </mat-form-field>
+                                      
+                                        <div>
+                                            <h4>Select Language</h4>
+                                            <mat-form-field>
+                                                <mat-label>Language</mat-label>
+                                                <select matNativeControl id="language" name="language" [(ngModel)]="newBook.language">
+                                                    <option value="english">English</option>
+                                                    <option value="spanish">Spanish</option>
+                                                    <option value="french">French</option>
+                                                    <option value="chichewa">Chichewa</option>
+                                                </select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div>
+                                            <h4>Select Format</h4>
+                                            <mat-form-field>
+                                                <mat-label>Format</mat-label>
+                                                <select matNativeControl id="format" name="format" [(ngModel)]="newBook.format">
+                                                    <option value="paperback">PaperBack</option>
+                                                    <option value="hardcover">HardCover</option>
+                                                </select>
+                                            </mat-form-field>
+                                        </div>
+                                       
+                                        <div>
+                                            <mat-form-field>
+                                                <mat-label>Publication Date</mat-label>
+                                                <input matInput [matDatepicker]="picker" id="publicationDate" (ngModelChange)="onDataChange($event)" placeholder="Choose a date" required [(ngModel)]="newBook.publicationDate" name="publicationDate">
+                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                <mat-datepicker #picker></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <mat-slide-toggle [color]="color" [checked]="checked" [disabled]="disabled" [(ngModel)]="newBook.active" name="active">Active</mat-slide-toggle>
+                                        <p></p>
+                                        <h4>Upload Image *</h4>
+                                        <input id="tile" type="file" id="bookImage" name="bookImage" (change)="uploadImageService.fileChangeEvent($event)">
+                                        <br><br>
+
+                                    </div>
+                        
+                                </div>
+                            </div>
+                        </div>   <!--End Layout for category-->         
+                        <div class="row">
+                          <button mat-raised-button color="primary">Submit</button>
+                          &nbsp;
+                          <a class="mat-warn" mat-raised-button routerLink="/allbooks">Cancel</a>
+                        </div>
+                      </div>
+                      <!-- <div fxLayoutAlign="stretch">
+                        <pre>Status : {{register.status | json }}
+            Data :               
+            {{register.value | json }}
+            Errors :
+            {{ register.get('email').errors | json }}
+                        </pre>
+                      </div> -->
+                    </div>
+                  </form>
+                </mat-card-content>
+              </mat-card>
+    </div><!--End div hidden-->
+        <div class="row" [hidden]="!bookAdded">
+            <h3>Book added successfully!</h3>
+        </div>
+
+</div><!--End class="container-->

@@ -1,0 +1,21 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <h1 style="font-weight: bold;">Balaka Shopping Store</h1>
+      <span [hidden]="!loggedIn" class="menu-spacer"></span>
+      <div [hidden]="!loggedIn">
+        <a mat-button routerLink="/allbooks"> All Books </a>
+        <a mat-button routerLink="/add-book"> Add Book </a>
+        <a mat-button routerLink=""> Contacts </a>
+        <a mat-button routerLink=""> Create Contact </a>
+        <a mat-button routerLink=""> Activities </a>
+        <a mat-button routerLink=""> Create Activity </a>
+      </div>
+      <span class="example-spacer"></span>
+        <div>
+            <a mat-button [routerLink]=""> Register </a>
+        </div>
+      <div [hidden]="!loggedIn">
+        <a mat-button (click)="logout()"> Logout</a>
+      </div>
+    </mat-toolbar-row>
+  

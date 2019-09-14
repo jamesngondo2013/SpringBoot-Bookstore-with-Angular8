@@ -1,0 +1,164 @@
+<div class="container">
+        <div [hidden]="bookAdded">
+            <mat-toolbar>
+                <div class="title-center">
+                    <span style="font-weight: bold;">Edit Book Information</span>
+                </div>
+                <div class="row" [hidden]="!bookUpdated">
+                    <h3>Book Updated successfully!</h3>
+                </div>
+            </mat-toolbar>
+            <div style="margin-top: 20px;">
+                <a routerLink="/allbooks"><i class="fa fa-long-arrow-left"></i> Go Back</a>
+                <p></p>
+            </div>
+           
+            <mat-card>
+                    <mat-card-content class="container">
+                      <form class="register-form" (ngSubmit)="onSubmit()">
+                        <!-- fxLayout="row" fxLayoutGap="20px" -->
+                        <div>
+                          <div fxLayout="column">
+                            <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                              <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center" class="mat-form-field--inline">
+                                <mat-form-field>
+                                  <input matInput id="title" placeholder="Title" type="text" required [(ngModel)]="editBook.title" name="title">
+                                </mat-form-field>
+                
+                                <mat-form-field>
+                                  <input matInput id="author" placeholder="Author" type="text" required [(ngModel)]="editBook.author" name="author">
+                                 
+                                </mat-form-field>
+                              </div>
+                            </div>
+    
+                            <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                              <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center" class="mat-form-field--inline">
+                                <mat-form-field>
+                                  <input matInput id="publisher" placeholder="Publisher" type="text" required [(ngModel)]="editBook.publisher" name="publisher">
+                                </mat-form-field>
+    
+                                <mat-form-field>
+                                  <input matInput id="isbn" type="text" required [(ngModel)]="editBook.isbn" name="isbn" placeholder="ISBN">
+                                 
+                                </mat-form-field>
+                              </div>
+                            </div>
+    
+                            <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                    <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center" class="mat-form-field--inline">
+                                      <mat-form-field>
+                                        <input matInput id="shippingWeight" type="number" [(ngModel)]="editBook.shippingWeight" name="shippingWeight" step="0.01" placeholder="Shipping Weight">
+                                      </mat-form-field>
+    
+                                      <mat-form-field>
+                                        <input matInput id="pageNumber" type="number" [(ngModel)]="editBook.numberOfPages" name="numberOfPages" step="1" placeholder="Number of Pages">
+                                      </mat-form-field>
+                                    </div>
+                            </div>
+    
+                            <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                    <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start center" class="mat-form-field--inline">
+                                      <mat-form-field>
+                                        <input matInput id="listPrice" type="number" [(ngModel)]="editBook.listPrice" name="listPrice" step="0.01" placeholder="List Price">
+                                      </mat-form-field>
+    
+                                      <mat-form-field>
+                                        <input matInput id="ourPrice" type="number" [(ngModel)]="editBook.ourPrice" name="ourPrice" step="0.01" placeholder="Our Price" required>
+                                      </mat-form-field>
+                                    </div>
+                            </div>
+    
+                            <div fxLayout="column" fxLayoutGap="40px" fxLayoutAlign="center stretch" class="row">
+                              <div fxLayout="row" fxLayoutGap="40px" fxLayoutAlign="start" class="mat-form-field--inline">
+                                <mat-form-field>
+                                    <textarea matInput id="description" [(ngModel)]="editBook.description" name="description" placeholder="Description" required></textarea>
+                                </mat-form-field>
+                                
+                                <mat-form-field>
+                                  <input matInput placeholder="Numbers in Stock" id="inStockNumber" type="number" [(ngModel)]="editBook.inStockNumber" name="inStockNumber" step="0.01">
+                                </mat-form-field>
+                              </div>
+                            </div>
+                          
+                            <div fxLayout="column" fxLayoutAlign="start" class="row">
+                                <div fxLayout="row" fxLayoutGap="50px">
+                                
+                                    <div fxLayout="column" fxLayoutGap="15px" fxLayoutAlign="start">
+                                        <div fxLayout="row" fxLayoutGap="20px" fxLayoutAlign="start center">
+                                            <h4>Select Category</h4>
+                                            <mat-form-field>
+                                                <mat-label>Category</mat-label>
+                                                <select matNativeControl id="category" name="category" [(ngModel)]="editBook.category">
+                                                    <option value="Management">Management</option>
+                                                    <option value="Fiction">Fiction</option>
+                                                    <option value="Engineering">Engineering</option>
+                                                    <option value="Programming">Programming</option>
+                                                </select>
+                                            </mat-form-field>
+                                          
+                                            <div>
+                                                <h4>Select Language</h4>
+                                                <mat-form-field>
+                                                    <mat-label>Language</mat-label>
+                                                    <select matNativeControl id="language" name="language" [(ngModel)]="editBook.language">
+                                                        <option value="English">English</option>
+                                                        <option value="Spanish">Spanish</option>
+                                                        <option value="French">French</option>
+                                                        <option value="Chichewa">Chichewa</option>
+                                                    </select>
+                                                </mat-form-field>
+                                            </div>
+                                            <div>
+                                                <h4>Select Format</h4>
+                                                <mat-form-field>
+                                                    <mat-label>Format</mat-label>
+                                                    <select matNativeControl id="format" name="format" [(ngModel)]="editBook.format">
+                                                        <option value="Paperback">PaperBack</option>
+                                                        <option value="Hardcover">HardCover</option>
+                                                    </select>
+                                                </mat-form-field>
+                                            </div>
+                                           
+                                            <div>
+                                                <mat-form-field>
+                                                    <mat-label>Publication Date</mat-label>
+                                                    <input matInput [matDatepicker]="picker" id="publicationDate" (ngModelChange)="onDataChange($event)" placeholder="Choose a date" required [(ngModel)]="editBook.publicationDate" name="publicationDate">
+                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                    <mat-datepicker #picker></mat-datepicker>
+                                                </mat-form-field>
+                                            </div>
+    
+                                            <mat-slide-toggle [color]="color" [checked]="checked" [disabled]="disabled" [(ngModel)]="editBook.active" name="active">Active</mat-slide-toggle>
+                                            <p></p>
+                                            <h4>Upload Image</h4>
+                                            <input id="tile" type="file" id="bookImage" name="bookImage" (change)="uploadImageService.fileChangeEvent($event)">
+                                            <br><br>
+    
+                                        </div>
+                            
+                                    </div>
+                                </div>
+                            </div>   <!--End Layout for category-->         
+                            <div class="row">
+                              <button mat-raised-button color="primary">Update</button>
+                              &nbsp;
+                              <a class="mat-warn" mat-raised-button routerLink="/allbooks">Cancel</a>
+                            </div>
+                          </div>
+                          <!-- <div fxLayoutAlign="stretch">
+                            <pre>Status : {{register.status | json }}
+                Data :               
+                {{register.value | json }}
+                Errors :
+                {{ register.get('email').errors | json }}
+                            </pre>
+                          </div> -->
+                        </div>
+                      </form>
+                    </mat-card-content>
+                  </mat-card>
+        </div><!--End div hidden-->
+          
+    </div><!--End class="container-->
+    
