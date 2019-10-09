@@ -1,0 +1,50 @@
+<div class="container">
+
+  <div class="card bg-light">
+ 
+  <article class="card-body mx-auto" style="max-width: 400px;">
+    <h4 class="card-title mt-3 text-center">Login</h4>
+  
+    <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input type="text" class="form-control" placeholder="Your Name" name="username" [(ngModel)]="form.username" #username="ngModel" required />
+            <div *ngIf="f.submitted && username.invalid">
+                <div *ngIf="username.errors.required">Username is required</div>
+            </div>
+          </div> <!-- form-group// -->
+
+          <div class="form-group input-group">
+            <div class="input-group-prepend">
+              <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="form.password" #password="ngModel" required minlength="6" />
+          <div *ngIf="f.submitted && password.invalid">
+            <div *ngIf="password.errors.required">Password is required</div>
+            <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+          </div>
+          </div> <!-- form-group// -->
+                                     
+      <div class="form-group">
+          <button type="submit" class="btn btn-primary btn-block"> Login  </button>
+          <div *ngIf="f.submitted && isLoginFailed" class="alert alert-danger">
+              Login failed: {{errorMessage}}
+            </div>
+      </div> <!-- form-group// -->      
+                                                                  
+  </form>
+  <p>Don't have an account?
+  <a routerLink="/register" class="btn btn-success">Sign Up</a></p>
+  <p><a routerLink="/forgot-password" >Forgot Password?</a></p>
+
+
+  </article>
+
+  </div> <!-- card.// -->
+  
+  </div> 
+  <!--container end.//-->
+
+  

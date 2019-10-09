@@ -1,0 +1,13 @@
+.bs-example{
+    margin: 20px;
+}
+.example-spacer{
+    flex: 1 1 auto;
+}
+
+ul.navbar-nav{
+     white-space:nowrap;
+    }
+.navbar-nav li{
+    display:inline-block; float:none;
+}

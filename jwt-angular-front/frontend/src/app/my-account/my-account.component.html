@@ -1,0 +1,249 @@
+<div class="container">
+    <div class="col-xs-3"></div>
+    <div class="col-xs-9">
+        <div class="panel-group">
+            <div class="panel panel-default panel-faq" style="border:none;">
+                <div class="panel-body" style="background-color: #ededed; margin-top:20px;">
+                    <mat-tab-group >
+
+                        <mat-tab label="View">
+                            <div style="margin-top:10px;">
+                                <mat-card>
+                                    <mat-card-content class="container">
+                                        <form class="register-form" (ngSubmit)="onSubmit()">
+                                            <!-- fxLayout="row" fxLayoutGap="20px" -->
+                                            <div>
+                                                <div fxLayout="column">
+                                                    <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                                        <div fxLayout="row" fxLayoutGap="40px"
+                                                            fxLayoutAlign="start center" class="mat-form-field--inline">
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="first name">
+                                                            </mat-form-field>
+
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="last name">
+
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <button mat-raised-button color="primary">Update</button>
+                                                        &nbsp;
+                                                        <a class="mat-warn" mat-raised-button
+                                                            routerLink="/allbooks">Cancel</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Edit">
+                            <div style="margin-top: 20px;">
+                                <mat-card>
+                                    <mat-card-content class="container">
+                                        <form (ngSubmit)="onUpdateUserInfo()" *ngIf="updateInfo">
+                                                <input type="hidden" name="id" [(ngModel)]="updateInfo.id" #id />
+                                            <div>
+                                                <div fxLayout="column">
+                                                    <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                                        <div fxLayout="row" fxLayoutGap="40px"
+                                                            fxLayoutAlign="start center" class="mat-form-field--inline">
+                                                            <mat-form-field>
+                                                                <input matInput type="text" class="form-control" id="firstname" name="firstname" [(ngModel)]="updateInfo.firstname" #firstname placeholder="First Name">
+                                                            </mat-form-field>
+
+                                                            <mat-form-field>
+                                                                <input matInput type="text" class="form-control" id="lastname" name="lastname" [(ngModel)]="updateInfo.lastname" #lastname placeholder="Last Name">
+
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div><!---->
+
+                                                    <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                                            <div fxLayout="row" fxLayoutGap="40px"
+                                                                fxLayoutAlign="start center" class="mat-form-field--inline">
+                                                                <mat-form-field>
+                                                                        <span *ngIf="usernameExists" style="color:red">Username already exists. Choose a different one.</span>
+                                                                    <input matInput type="text" class="form-control" id="username" name="username" [(ngModel)]="updateInfo.username" #username placeholder="Username" required>
+                                                                </mat-form-field>
+
+                                                                <span *ngIf="emailExists" style="color:red">Email already exists. Choose a different one.</span>
+                                                                <mat-form-field>
+                                                                    <input matInput type="email" class="form-control" id="email" name="email" [(ngModel)]="updateInfo.email" #email placeholder="Email Address" required>
+    
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div><!---->
+
+                                                        
+                                                    <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                                            <div fxLayout="row" fxLayoutGap="40px"
+                                                                fxLayoutAlign="start center" class="mat-form-field--inline">
+                                                                <mat-form-field>
+                                                                    <input matInput type="password" class="form-control" id="password" name="password" [(ngModel)]="updateInfo.password" #currentPassword placeholder="Current Password">
+                                                                </mat-form-field>
+    
+                                                                <mat-form-field>
+                                                                    <span id="checkPasswordMatch" style="color:red;"></span>
+                                                                    <input matInput type="password" class="form-control" id="txtNewPassword" name="txtNewPassword" [(ngModel)]="updateInfo.newPassword" #newPassword placeholder="New Password">
+    
+                                                                </mat-form-field>
+                                                            </div>
+                                                        </div><!---->
+
+                                                        <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                                                <div fxLayout="row" fxLayoutGap="40px"
+                                                                    fxLayoutAlign="start center" class="mat-form-field--inline">
+                                                                    <mat-form-field>
+                                                                        <input type="password" class="form-control" id="txtConfirmPassword" name="txtConfirmPassword" matInput placeholder="Confirm New Password">
+        
+                                                                    </mat-form-field>
+                                                                </div>
+                                                            </div><!---->
+    
+
+
+                                                    <div class="row">
+                                                        <button mat-raised-button color="primary">Update</button>
+                                                        &nbsp;
+                                                        <a class="mat-warn" mat-raised-button routerLink="/">Cancel</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Orders">
+                            <div style="margin-top: 20px;">
+                                <div class="alert alert-info" *ngIf="">Email doesn't exists.</div>
+                                <div class="alert alert-success" *ngIf="">Email sent.</div>
+                                <mat-card>
+                                    <mat-card-content class="container">
+                                        <form class="register-form" (ngSubmit)="onSubmit()">
+                                            <!-- fxLayout="row" fxLayoutGap="20px" -->
+                                            <div>
+                                                <div fxLayout="column">
+                                                    <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                                        <div fxLayout="row" fxLayoutGap="40px"
+                                                            fxLayoutAlign="start center" class="mat-form-field--inline">
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="first name">
+                                                            </mat-form-field>
+
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="last name">
+
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <button mat-raised-button color="primary">Update</button>
+                                                        &nbsp;
+                                                        <a class="mat-warn" mat-raised-button
+                                                            routerLink="/allbooks">Cancel</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Billing">
+                            <div style="margin-top: 20px;">
+                                <div class="alert alert-info" *ngIf="emailSent">An email has been sent to the email
+                                    address you just registered. Please validate your email adderss and update your
+                                    password info.</div>
+                                <mat-card>
+                                    <mat-card-content class="container">
+                                        <form class="register-form" (ngSubmit)="onSubmit()">
+                                            <!-- fxLayout="row" fxLayoutGap="20px" -->
+                                            <div>
+                                                <div fxLayout="column">
+                                                    <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                                        <div fxLayout="row" fxLayoutGap="40px"
+                                                            fxLayoutAlign="start center" class="mat-form-field--inline">
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="first name">
+                                                            </mat-form-field>
+
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="last name">
+
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <button mat-raised-button color="primary">Update</button>
+                                                        &nbsp;
+                                                        <a class="mat-warn" mat-raised-button
+                                                            routerLink="/allbooks">Cancel</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="Shipping">
+                            <div style="margin-top: 20px;">
+                                <div class="alert alert-info" *ngIf="emailSent">An email has been sent to the email
+                                    address you just registered. Please validate your email adderss and update your
+                                    password info.</div>
+                                <mat-card>
+                                    <mat-card-content class="container">
+                                        <form class="register-form" (ngSubmit)="onSubmit()">
+                                            <!-- fxLayout="row" fxLayoutGap="20px" -->
+                                            <div>
+                                                <div fxLayout="column">
+                                                    <div fxLayout="column" fxLayoutAlign="center stretch" class="row">
+                                                        <div fxLayout="row" fxLayoutGap="40px"
+                                                            fxLayoutAlign="start center" class="mat-form-field--inline">
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="first name">
+                                                            </mat-form-field>
+
+                                                            <mat-form-field>
+                                                                <input matInput placeholder="last name">
+
+                                                            </mat-form-field>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="row">
+                                                        <button mat-raised-button color="primary">Update</button>
+                                                        &nbsp;
+                                                        <a class="mat-warn" mat-raised-button
+                                                            routerLink="/allbooks">Cancel</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </form>
+                                    </mat-card-content>
+                                </mat-card>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
