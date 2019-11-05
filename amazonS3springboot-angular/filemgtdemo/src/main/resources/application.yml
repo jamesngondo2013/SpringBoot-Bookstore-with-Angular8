@@ -1,7 +1,7 @@
 amazonProperties:
    endpointUrl: https://363831971299.signin.aws.amazon.com/console
-   accessKey: AKIAVJNQTJXRWLGR6D5I
-   secretKey: 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
+   accessKey: xxxxxxx
+   secretKey: xxxxxxx
    bucketName: mw-healthy-docs
 spring:
  servlet:
