@@ -1,10 +1,9 @@
-package com.james.training.jwtsecurity.repository;
+package com.fileuploaddownload.filemgtdemo.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.james.training.jwtsecurity.model.User;
- 
+import com.fileuploaddownload.filemgtdemo.model.User;
  
 @Repository
 public interface UserRepository extends CrudRepository<User, Long> {

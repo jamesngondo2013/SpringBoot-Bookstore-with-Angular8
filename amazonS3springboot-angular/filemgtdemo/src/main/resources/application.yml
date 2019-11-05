@@ -1,0 +1,10 @@
+amazonProperties:
+   endpointUrl: https://363831971299.signin.aws.amazon.com/console
+   accessKey: AKIAVJNQTJXRWLGR6D5I
+   secretKey: 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
+   bucketName: mw-healthy-docs
+spring:
+ servlet:
+  multipart:
+   max-file-size: 100MB
+   max-request-size: 100MB

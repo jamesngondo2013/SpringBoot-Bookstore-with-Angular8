@@ -1,4 +1,4 @@
-package com.james.training.jwtsecurity.controller;
+package com.fileuploaddownload.filemgtdemo.exception.controller;
 
 import java.security.Principal;
 import java.util.HashSet;
@@ -27,20 +27,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.james.training.jwtsecurity.message.request.ForgotPasswordForm;
-import com.james.training.jwtsecurity.message.request.LoginForm;
-import com.james.training.jwtsecurity.message.request.SignUpForm;
-import com.james.training.jwtsecurity.message.request.UpdateUserInfoForm;
-import com.james.training.jwtsecurity.message.response.JwtResponse;
-import com.james.training.jwtsecurity.message.response.ResponseMessage;
-import com.james.training.jwtsecurity.model.Role;
-import com.james.training.jwtsecurity.model.RoleName;
-import com.james.training.jwtsecurity.model.User;
-import com.james.training.jwtsecurity.repository.RoleRepository;
-import com.james.training.jwtsecurity.repository.UserRepository;
-import com.james.training.jwtsecurity.security.jwt.JwtProvider;
-import com.james.training.jwtsecurity.utility.MailConstructor;
-import com.james.training.jwtsecurity.utility.SecurityUtility;
+import com.fileuploaddownload.filemgtdemo.jwtmessage.request.ForgotPasswordForm;
+import com.fileuploaddownload.filemgtdemo.jwtmessage.request.LoginForm;
+import com.fileuploaddownload.filemgtdemo.jwtmessage.request.SignUpForm;
+import com.fileuploaddownload.filemgtdemo.jwtmessage.request.UpdateUserInfoForm;
+import com.fileuploaddownload.filemgtdemo.jwtmessage.response.JwtResponse;
+import com.fileuploaddownload.filemgtdemo.jwtmessage.response.ResponseMessage;
+import com.fileuploaddownload.filemgtdemo.model.Role;
+import com.fileuploaddownload.filemgtdemo.model.RoleName;
+import com.fileuploaddownload.filemgtdemo.model.User;
+import com.fileuploaddownload.filemgtdemo.repository.RoleRepository;
+import com.fileuploaddownload.filemgtdemo.repository.UserRepository;
+import com.fileuploaddownload.filemgtdemo.security.jwt.JwtProvider;
+import com.fileuploaddownload.filemgtdemo.utility.MailConstructor;
+import com.fileuploaddownload.filemgtdemo.utility.SecurityUtility;
  
 /*
  * AuthRestAPIs defines 2 APIs:
@@ -183,67 +183,67 @@ public class AuthRestAPIs {
 	}
   
   @PostMapping("/updateInfo")
-  public ResponseEntity<?> updateInfo(@Valid @RequestBody UpdateUserInfoForm updateUserInfo) throws Exception{
-	
-	Long id = (Long) updateUserInfo.getId();
-	
-	String email = (String) updateUserInfo.getEmail();
-	String username = (String) updateUserInfo.getUsername();
-	String firstName = (String) updateUserInfo.getFirstname();
-	String lastName = (String) updateUserInfo.getLastname();
-	String newPassword = (String) updateUserInfo.getNewPassword();
-	String currentPassword = (String) updateUserInfo.getPassword();
-	
-	System.out.println(id +" "+ firstName +" "+ lastName+ " "+ newPassword+" "+ currentPassword);
-	
-	User currentUser = userRepository.findById(id).get();
-	
-	if(currentUser == null) {
-		return new ResponseEntity<>("User not found", HttpStatus.BAD_REQUEST);
-	}
-	
-	if(userRepository.findByEmail(email) != null) {
-		if(userRepository.findByEmail(email).getId() != currentUser.getId()) {
-			
-			return new ResponseEntity<>("Email not found!", HttpStatus.BAD_REQUEST);
+	public ResponseEntity<?> updateInfo(@Valid @RequestBody UpdateUserInfoForm updateUserInfo) throws Exception {
+
+		Long id = (Long) updateUserInfo.getId();
+
+		String email = (String) updateUserInfo.getEmail();
+		String username = (String) updateUserInfo.getUsername();
+		String firstName = (String) updateUserInfo.getFirstname();
+		String lastName = (String) updateUserInfo.getLastname();
+		String newPassword = (String) updateUserInfo.getNewPassword();
+		String currentPassword = (String) updateUserInfo.getPassword();
+
+		System.out.println(id + " " + firstName + " " + lastName + " " + newPassword + " " + currentPassword);
+
+		User currentUser = userRepository.findById(id).get();
+
+		if (currentUser == null) {
+			return new ResponseEntity<>("User not found", HttpStatus.BAD_REQUEST);
 		}
-	}
-	
-	if(userRepository.findByUsername(username) != null) {
-		if(userRepository.findByUsername(username).getId() != currentUser.getId()) {
-			return new ResponseEntity<>("Username not found!", HttpStatus.BAD_REQUEST);
-		}
-	}
-	
-		String dbPassword = currentUser.getPassword();
-		
-		if(null != currentPassword)
-		if(encoder.matches(currentPassword, dbPassword)) {
-			if(newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
-				
-				 String encryptedPassword =  encoder.encode(newPassword);
-				 
-				currentUser.setPassword(encryptedPassword);
-				
+
+		if (userRepository.findByEmail(email) != null) {
+
+			if (userRepository.findByEmail(email).getId() != currentUser.getId()) {
+
+				return new ResponseEntity<>("Email not found!", HttpStatus.BAD_REQUEST);
 			}
-			currentUser.setEmail(email);
-		} else {
-			return new ResponseEntity<>("Incorrect current password!", HttpStatus.BAD_REQUEST);
 		}
-	
-	
-	currentUser.setFirstname(firstName);
-	currentUser.setLastname(lastName);
-	currentUser.setUsername(username);
-	currentUser.setEmail(email);
-	
-	
-	userRepository.save(currentUser);
-	
-	 SimpleMailMessage newEmail = mailConstructor.constructUpdateUserDetails(currentUser, newPassword);
-	 mailSender.send(newEmail);
-	
-	return new ResponseEntity<>("Update Success", HttpStatus.OK);
-}
+
+		if (userRepository.findByUsername(username) != null) {
+			if (userRepository.findByUsername(username).getId() != currentUser.getId()) {
+				return new ResponseEntity<>("Username not found!", HttpStatus.BAD_REQUEST);
+			}
+		}
+
+		// encrypted user password from db
+		String dbPassword = currentUser.getPassword();
+
+		if (null != currentPassword)
+			if (encoder.matches(currentPassword, dbPassword)) {
+				if (newPassword != null && !newPassword.isEmpty() && !newPassword.equals("")) {
+
+					String encryptedPassword = encoder.encode(newPassword);
+
+					currentUser.setPassword(encryptedPassword);
+
+				}
+				currentUser.setEmail(email);
+			} else {
+				return new ResponseEntity<>("Incorrect current password!", HttpStatus.BAD_REQUEST);
+			}
+
+		currentUser.setFirstname(firstName);
+		currentUser.setLastname(lastName);
+		currentUser.setUsername(username);
+		currentUser.setEmail(email);
+
+		userRepository.save(currentUser);
+
+		SimpleMailMessage newEmail = mailConstructor.constructUpdateUserDetailsEmail(currentUser, newPassword);
+		mailSender.send(newEmail);
+
+		return new ResponseEntity<>("Update successful - Email sent!", HttpStatus.OK);
+	}
 
 }

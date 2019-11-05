@@ -1,4 +1,4 @@
-package com.james.training.jwtsecurity.message.request;
+package com.fileuploaddownload.filemgtdemo.jwtmessage.request;
 
 import java.util.Set;
 
@@ -19,30 +19,27 @@ public class UpdateUserInfoForm {
 			return id;
 		}
 
-		@NotBlank
+	
 	    @Size(min = 3, max = 50)
 	    private String firstname;
 	    
-	    @NotBlank
 	    @Size(min = 3, max = 50)
 	    private String lastname;
 	 
-	    @NotBlank
 	    @Size(min = 3, max = 50)
 	    private String username;
 	 
-	    @NotBlank
 	    @Size(max = 60)
 	    @Email
 	    private String email;
 	    
 	    private Set<String> role;
 	    
-	    @NotBlank
+		@NotBlank
 	    @Size(min = 6, max = 40)
 	    private String password;
 	    
-	    @NotBlank
+	    
 	    @Size(min = 6, max = 40)
 	    private String newPassword;
 	 
